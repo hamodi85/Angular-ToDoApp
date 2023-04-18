@@ -1,0 +1,126 @@
+<div class="font-sans antialiased bg-grey-lightest">
+    <header class="text-gray-600 body-font">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <svg class="w-10 h-10 bg-purple-500 rounded-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="11" fill="currentColor"/>
+        </svg>
+      </a>
+      
+      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        <a class="mr-5 hover:text-gray-900" routerLink="/">Home</a>
+        <a class="mr-5 hover:text-gray-900" routerLink="/login">Login</a>
+        <a class="mr-5 hover:text-gray-900" routerLink="/signup">Sign up</a>
+
+      </nav>
+    </div>
+  </header>
+    <!-- Content -->
+    <div class="w-full bg-gray-100" style="padding-top: 4rem;">
+        <div class="container mx-auto py-8">
+          <div class="w-5/6 lg:w-1/2 mx-auto bg-white rounded shadow">
+            <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+              <div class="py-4 px-8 text-black text-xl border-b border-gray-300">Register</div>
+              <div class="py-4 px-8">
+                <div class="flex mb-4">
+                  <div class="w-1/2 mr-1">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="first_name">First Name</label>
+                    <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700" id="first_name" type="text" placeholder="Your first name" formControlName="firstName" />
+
+                    <div *ngIf="signUpForm.get('firstName')?.touched">
+                      <div *ngIf="signUpForm.get('firstName')?.errors?.['required']">
+                        <p class="text-red-500 text-xs">First name is required.</p>
+                      </div>
+                      <div *ngIf="signUpForm.get('firstName')?.errors?.['invalidName']">
+                        <p class="text-red-500 text-xs">Invalid first name. Only letters are allowed.</p>
+                      </div>
+                    </div>
+                    
+                      
+                  </div>
+                  <div class="w-1/2 ml-1">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="last_name">Last Name</label>
+                    <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700" id="last_name" type="text" placeholder="Your last name" formControlName="lastName" />
+
+                    <div *ngIf="signUpForm.get('lastName')?.touched && signUpForm.get('lastName')?.errors?.['required']">
+                        <p class="text-red-500 text-xs">Last name is required.</p>
+                      </div>
+                      
+                      <div *ngIf="signUpForm.get('lastName')?.touched && signUpForm.get('lastName')?.errors?.['invalidName']">
+                        <p class="text-red-500 text-xs">Invalid last name. Only letters are allowed.</p>
+                      </div>
+                      
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email Address</label>
+                  <input
+                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700"
+                    id="email"
+                    type="email"
+                    placeholder="Your email address"
+                    formControlName="email"
+                  />
+                  <div *ngIf="signUpForm.get('email')?.touched && signUpForm.get('email')?.errors?.['required']">
+                    <p class="text-red-500 text-xs">Email is required.</p>
+                  </div>
+                  
+                  <div *ngIf="signUpForm.get('email')?.touched && signUpForm.get('email')?.errors?.['email']">
+                    <p class="text-red-500 text-xs">Invalid email address.</p>
+                  </div>
+                  
+                </div>
+                <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username</label>
+                  <input
+                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700"
+                    id="username"
+                    type="text"
+                    placeholder="Your username"
+                    formControlName="username"
+                  />
+                  <div *ngIf="signUpForm.get('username')?.touched && signUpForm.get('username')?.errors?.['required']">
+                    <p class="text-red-500 text-xs">Username is required.</p>
+                  </div>
+                  
+                  <div *ngIf="signUpForm.get('username')?.touched && signUpForm.get('username')?.errors?.['invalidUsername']">
+                    <p class="text-red-500 text-xs">Invalid username. Only letters and numbers are allowed.</p>
+                  </div>
+                  
+                </div>
+                <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
+                  <input
+                  class="appearance-none border rounded w-full py-2 px-3 text-gray-700"
+                  id="password"
+                  type="password"
+                  placeholder="Your secure password"
+                  formControlName="password"
+                />
+                <p class="text-gray-600 text-xs mt-1">At least 6 characters</p>
+                <div *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.errors?.['required']">
+                    <p class="text-red-500 text-xs">Password is required.</p>
+                  </div>
+                  <div *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.errors?.['invalidPassword']">
+                    <p class="text-red-500 text-xs">Invalid password. Must contain at least one lowercase letter, one uppercase letter, one number, and be between 6 and 20 characters long.</p>
+                  </div>
+              </div>
+              <div class="flex items-center justify-between mt-8">
+                <button class="bg-black hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit"[disabled]="signUpForm.invalid">
+                  Sign Up
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <p class="text-center my-4">
+          <a routerLink="/login" class="text-gray-700 text-sm no-underline hover:text-gray-900">I already have an account</a>
+        </p>
+        
+        
+      </div>
+    </div>
+    
+      
+
+
